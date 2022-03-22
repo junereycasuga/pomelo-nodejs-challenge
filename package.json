@@ -16,7 +16,8 @@
   "license": "ISC",
   "dependencies": {
     "@hapi/hapi": "^20.2.1",
-    "@usefultools/utils": "^6.3.1"
+    "@usefultools/utils": "^6.3.1",
+    "hapi-pino": "^9.2.0"
   },
   "devDependencies": {
     "@types/hapi__hapi": "^20.0.10",

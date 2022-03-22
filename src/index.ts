@@ -14,6 +14,11 @@ const init = async () => {
     host: env.getAsStr('HOST'),
   })
 
+  // register plugins
+  await server.register({
+    plugin: require('hapi-pino'),
+  })
+
   const childMapUseCase = new ChildMapUseCase()
   const childMapHandler = new ChildMapHandler(childMapUseCase)
 

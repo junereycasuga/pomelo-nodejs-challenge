@@ -7,7 +7,7 @@ A small program that maps children of its parent
 1. Clone the project
 
 ```sh
-git clone git@github.com:junereycasyga/pomelo-nodejs-challenge.git
+git clone git@github.com:junereycasuga/pomelo-nodejs-challenge.git
 ```
 
 2. Install dependencies
