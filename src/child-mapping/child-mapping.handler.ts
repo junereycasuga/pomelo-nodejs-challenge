@@ -14,7 +14,7 @@ export default class ChildMapHandler implements ChildMapHandlerInterface {
     this.handleChildMapping = this.handleChildMapping.bind(this)
   }
 
-  handleChildMapping(request: Request): ChildMappingOutput[] {
+  handleChildMapping(request: Request) {
     const payload = request.payload as ChildMappingInput
     return this.childMapUseCase.processChildMap(payload)
   }
