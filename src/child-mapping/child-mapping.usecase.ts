@@ -12,6 +12,10 @@ export default class ChildMapUseCase {
   processChildMap(input: ChildMappingInput): ChildMappingOutput[] {
     let output: ChildMappingOutput[] = []
 
+    if (!input || typeof input === undefined || typeof input !== 'object') {
+      return output
+    }
+
     // flatten the input into single array
     // and sort by level in descending order
     const flattenedData = this.flatten(input).sort((a, b) => a.level - b.level)

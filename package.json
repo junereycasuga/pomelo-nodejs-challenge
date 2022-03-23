@@ -6,8 +6,8 @@
   "scripts": {
     "build": "tsc",
     "dev:build": "tsc --watch",
-    "dev:serve": "nodemon --exec 'npm run serve' --watch ./lib/",
-    "serve": "node ./lib/",
+    "dev:serve": "nodemon --exec 'npm run serve' --watch ./lib/src/",
+    "serve": "node ./lib/src/",
     "dev": "run-p dev:*",
     "test": "jest"
   },

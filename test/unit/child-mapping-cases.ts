@@ -1,4 +1,7 @@
 const testCases = [
+  ['given a null input as argument, return an empty array', null, []],
+  ['given a string input as an argument, return an empty array', 'test', []],
+  ['given an integer input as an argument, return an empty array', 1, []],
   ['given an empty input as arguments, return an empty array', {}, []],
   [
     'given an input with sorted object key as arguments, return the correct result',

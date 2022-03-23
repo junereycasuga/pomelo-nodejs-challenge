@@ -28,3 +28,9 @@ cp .env.example .env
 ```sh
 npm run dev
 ```
+
+### Running the test
+
+```
+npm run test
+```

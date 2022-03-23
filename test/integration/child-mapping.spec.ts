@@ -3,12 +3,12 @@ import { init } from '../../src/app'
 describe('POST /map-child', () => {
   let server
 
-  beforeEach(async () => {
+  beforeAll(async () => {
     server = await init()
     await server.start()
   })
 
-  afterEach(async () => {
+  afterAll(async () => {
     await server.stop()
   })
 

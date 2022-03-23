@@ -11,31 +11,28 @@ dotenv.config()
 const server = Hapi.server({
   port: env.getAsInt('PORT'),
   host: env.getAsStr('HOST'),
-  debug: {
-    log: ['test'],
-  },
-})
-
-// register plugins
-server.register({
-  plugin: require('hapi-pino'),
-})
-
-const childMapUseCase = new ChildMapUseCase()
-const childMapHandler = new ChildMapHandler(childMapUseCase)
-
-server.route({
-  method: 'POST',
-  path: '/map-child',
-  handler: childMapHandler.handleChildMapping,
-  options: {
-    validate: {
-      payload: Joi.object().required(),
-    },
-  },
 })
 
 export const init = async () => {
+  // register plugins
+  await server.register({
+    plugin: require('hapi-pino'),
+  })
+
+  const childMapUseCase = new ChildMapUseCase()
+  const childMapHandler = new ChildMapHandler(childMapUseCase)
+
+  server.route({
+    method: 'POST',
+    path: '/map-child',
+    handler: childMapHandler.handleChildMapping,
+    options: {
+      validate: {
+        payload: Joi.object().required(),
+      },
+    },
+  })
+
   await server.initialize()
 
   return server
