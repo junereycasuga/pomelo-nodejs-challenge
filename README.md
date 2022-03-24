@@ -1,6 +1,6 @@
 # Pomelo NodeJS Challenge
 
-A small program that maps children of its parent
+A small project that provides an API which maps the children to its parent and a simple webview that lists NodeJS repositories from Github
 
 ### Running the project
 

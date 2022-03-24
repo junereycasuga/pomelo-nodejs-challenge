@@ -1,6 +1,6 @@
 import dotenv from 'dotenv'
 import { env } from '@usefultools/utils'
-import Hapi, { Server } from '@hapi/hapi'
+import Hapi from '@hapi/hapi'
 import Vision from '@hapi/vision'
 import ChildMapHandler from './handlers/child-mapping.handler'
 import ChildMapUseCase from './usecases/child-mapping.usecase'
@@ -8,6 +8,7 @@ import Joi from 'joi'
 import HapiReactViews from 'hapi-react-views'
 import babelRegister from '@babel/register'
 import GithubHandler from './handlers/github.handler'
+import GithubUseCase from './usecases/github.usecase'
 
 babelRegister({
   presets: [
@@ -46,7 +47,8 @@ export const init = async () => {
   const childMapUseCase = new ChildMapUseCase()
   const childMapHandler = new ChildMapHandler(childMapUseCase)
 
-  const githubHandler = new GithubHandler()
+  const githubUseCase = new GithubUseCase()
+  const githubHandler = new GithubHandler(githubUseCase)
 
   server.route({
     method: 'POST',
@@ -63,6 +65,15 @@ export const init = async () => {
     method: 'GET',
     path: '/',
     handler: githubHandler.getRepositories,
+    options: {
+      validate: {
+        query: Joi.object({
+          query: Joi.string().optional(),
+          page: Joi.number().min(0).optional(),
+          perPage: Joi.number().min(1).optional(),
+        }),
+      },
+    },
   })
 
   await server.initialize()
