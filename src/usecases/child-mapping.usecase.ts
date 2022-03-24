@@ -1,7 +1,7 @@
 import {
   ChildMappingInput,
   ChildMappingOutput,
-} from '@src/child-mapping/child-mapping.types'
+} from '@src/types/child-mapping.types'
 
 export default class ChildMapUseCase {
   /**

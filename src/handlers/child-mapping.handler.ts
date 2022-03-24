@@ -1,9 +1,9 @@
 import { Request } from '@hapi/hapi'
-import ChildMapUseCase from '@src/child-mapping/child-mapping.usecase'
+import ChildMapUseCase from '@src/usecases/child-mapping.usecase'
 import {
   ChildMappingInput,
   ChildMappingOutput,
-} from '@src/child-mapping/child-mapping.types'
+} from '@src/types/child-mapping.types'
 
 export interface ChildMapHandlerInterface {
   handleChildMapping(request: Request): ChildMappingOutput[]

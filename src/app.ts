@@ -1,9 +1,21 @@
 import dotenv from 'dotenv'
 import { env } from '@usefultools/utils'
-import Hapi from '@hapi/hapi'
-import ChildMapHandler from './child-mapping/child-mapping.handler'
-import ChildMapUseCase from './child-mapping/child-mapping.usecase'
+import Hapi, { Server } from '@hapi/hapi'
+import Vision from '@hapi/vision'
+import ChildMapHandler from './handlers/child-mapping.handler'
+import ChildMapUseCase from './usecases/child-mapping.usecase'
 import Joi from 'joi'
+import HapiReactViews from 'hapi-react-views'
+import babelRegister from '@babel/register'
+import GithubHandler from './handlers/github.handler'
+
+babelRegister({
+  presets: [
+    ['@babel/preset-react', { runtime: 'automatic' }],
+    '@babel/preset-env',
+    '@babel/preset-typescript',
+  ],
+})
 
 dotenv.config()
 
@@ -15,12 +27,26 @@ const server = Hapi.server({
 
 export const init = async () => {
   // register plugins
-  await server.register({
-    plugin: require('hapi-pino'),
+  await Promise.all([
+    server.register({
+      plugin: require('hapi-pino'),
+    }),
+    server.register(Vision),
+  ])
+
+  // @ts-ignore
+  server.views({
+    engines: {
+      jsx: HapiReactViews,
+    },
+    relativeTo: __dirname,
+    path: 'views',
   })
 
   const childMapUseCase = new ChildMapUseCase()
   const childMapHandler = new ChildMapHandler(childMapUseCase)
+
+  const githubHandler = new GithubHandler()
 
   server.route({
     method: 'POST',
@@ -31,6 +57,12 @@ export const init = async () => {
         payload: Joi.object().required(),
       },
     },
+  })
+
+  server.route({
+    method: 'GET',
+    path: '/',
+    handler: githubHandler.getRepositories,
   })
 
   await server.initialize()

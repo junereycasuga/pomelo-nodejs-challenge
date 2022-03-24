@@ -1,4 +1,4 @@
-import ChildMapUseCase from '../../src/child-mapping/child-mapping.usecase'
+import ChildMapUseCase from '../../src/usecases/child-mapping.usecase'
 import testCases from './child-mapping-cases'
 
 let childMappingUseCase
