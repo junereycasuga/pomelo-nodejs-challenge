@@ -24,7 +24,7 @@ export default class GithubUseCase {
     return this.client.get('/search/repositories', {
       params: {
         page: page || 0,
-        per_page: perPage || 0,
+        per_page: perPage || 10,
         q: query || 'nodejs',
       },
     })
