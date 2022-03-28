@@ -23,7 +23,7 @@ export default class GithubUseCase {
   ): Promise<AxiosResponse> {
     return this.client.get('/search/repositories', {
       params: {
-        page: page || 0,
+        page: page || 1,
         per_page: perPage || 10,
         q: query || 'nodejs',
       },
