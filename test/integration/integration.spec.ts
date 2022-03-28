@@ -79,7 +79,16 @@ describe('Integration Test', () => {
         url: '/github?page=12345',
       })
       expect(res.statusCode).toBe(422)
-      expect(res.result.details).toBe('Test error response')
+      expect(res.result.message).toBe('Test error response')
+    })
+
+    it('responds with error when the request query input is invalid', async () => {
+      const res = await server.inject({
+        method: 'GET',
+        url: '/github?page=0',
+      })
+      expect(res.statusCode).toBe(400)
+      expect(res.result.message).toBe('Invalid request query input')
     })
   })
 })

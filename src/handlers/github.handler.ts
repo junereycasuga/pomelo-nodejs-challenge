@@ -33,7 +33,7 @@ export default class GithubHandler {
       })
     } catch (err) {
       return h.view('error', {
-        error: err.response.data.message,
+        error: err.response?.data?.message || 'Something went wrong',
       })
     }
   }
@@ -69,12 +69,12 @@ export default class GithubHandler {
     } catch (err) {
       const statusCode = err.response?.status || 500
       const error = err.response?.statusText || 'Internal Server Error'
-      const details = err.response?.data?.message || 'Something went wrong'
+      const message = err.response?.data?.message || 'Something went wrong'
       return h
         .response({
           statusCode,
           error,
-          details,
+          message,
         })
         .code(statusCode)
     }

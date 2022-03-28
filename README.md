@@ -34,3 +34,17 @@ npm run dev
 ```
 npm run test
 ```
+
+### Accessing the webview
+
+The webview is on the root route
+
+```
+URL: https://localhost:3000/
+```
+
+### Documentation
+
+```
+URL: https://localhost:3000/documentation/
+```

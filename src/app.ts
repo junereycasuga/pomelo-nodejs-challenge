@@ -74,7 +74,7 @@ export const init = async () => {
       validate: {
         query: Joi.object({
           query: Joi.string().optional(),
-          page: Joi.number().min(0).optional(),
+          page: Joi.number().min(1).optional(),
           perPage: Joi.number().min(1).optional(),
         }),
       },
@@ -92,11 +92,30 @@ export const init = async () => {
     handler: githubHandler.getRepositoriesJSON,
     options: {
       tags: ['api'],
+      description: `This endpoint was created for the purpose of being able to test the params being
+      passed into the view file in getRepositories endpoint.
+      The reason for this is that running the integration test on the endpoint
+      that returns with the view fails as it cannot find the jsx file for it as
+      it needs to compile first from tsx`,
       validate: {
         query: Joi.object({
           query: Joi.string().optional(),
-          page: Joi.number().min(0).optional(),
+          page: Joi.number().min(1).optional(),
           perPage: Joi.number().min(1).optional(),
+        }),
+      },
+      response: {
+        schema: Joi.object({
+          page: Joi.number(),
+          perPage: Joi.number(),
+          pageCount: Joi.number(),
+          prevPage: Joi.number(),
+          nextPage: Joi.number(),
+          repositories: Joi.object({
+            total_count: Joi.number(),
+            incomplete_results: Joi.bool(),
+            items: Joi.array().items(Joi.object()),
+          }),
         }),
       },
     },
