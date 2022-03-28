@@ -52,7 +52,6 @@ export default class GithubHandler {
         page,
         query
       )
-      console.log(response)
       const { data } = response
       const pageCount = Math.ceil(data.total_count / perPage)
       const prevPage = page - 1 <= 0 ? 1 : page - 1
